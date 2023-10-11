@@ -19,14 +19,14 @@ const FooterDoc = () => {
                 </a>
               </li>
               <li>
-                <a href="/" className="text-white text-decoration-none">
+                <a href="/doctor/:id" className="text-white text-decoration-none">
                 <div className="link-hover">
                     My Profile
                 </div>
                 </a>
               </li>
               <li>
-                <a href="/" className="text-white text-decoration-none">
+                <a href="/doctor/:id/appointments" className="text-white text-decoration-none">
                 <div className="link-hover">
                     Appointments
                 </div>
