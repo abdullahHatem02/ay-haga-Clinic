@@ -19,7 +19,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#About" className="text-white text-decoration-none">
+                <a href="/#about" className="text-white text-decoration-none">
                 <div className="link-hover">
                     About Us
                 </div>
