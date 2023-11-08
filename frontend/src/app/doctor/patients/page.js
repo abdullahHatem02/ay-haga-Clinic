@@ -13,7 +13,7 @@ import NavbarDoc from '../../../../components/NavbarDoc';
 
 
 function PatientsList() {
-  const tableHeaders = ['name','email','date of birth','gender', 'phone number','Appointment date','']; // Add a new column header
+  const tableHeaders = ['name','email','date of birth','gender', 'phone number','Appointment date','']; 
 
   const tabledata2 = useSelector(state => state.patientsReducer?.patients?.data)
   const tabledataU1 = useSelector(state => state.filterPatientsBasedOnUpcomingAppointmentsReducer?.patients?.data)
