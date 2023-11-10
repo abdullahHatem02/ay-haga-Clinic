@@ -48,7 +48,7 @@ function Familymembers() {
       <h3 className='my-1 mt-0 text-center text-title'>Family Members</h3>
       <div className='underline-Bold mx-auto mb-5'></div>
       <div className="row justify-content-end align-items-center me-5">
-          <Button text="Add New Family Member" variant='md' className='ms-auto col-md-3' onClick={() => setModalShow(true)}/>
+          <Button text="Add New Family Member" variant='md' className='ms-auto me-4 col-md-3' onClick={() => setModalShow(true)}/>
       </div>
       <AddFamily
       show={modalShow}
