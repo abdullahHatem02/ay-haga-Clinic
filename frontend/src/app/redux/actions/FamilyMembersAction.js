@@ -8,7 +8,10 @@ import {
   VIEW_FAMILY_MEMBERS_FAIL,
   LINK_FAMILY_MEMBER_REQUEST,
   LINK_FAMILY_MEMBER_SUCCESS,
-  LINK_FAMILY_MEMBER_FAIL
+  LINK_FAMILY_MEMBER_FAIL,
+  VIEW_MEMBER_PATIENT_REQUEST,
+  VIEW_MEMBER_PATIENT_SUCCESS,
+  VIEW_MEMBER_PATIENT_FAIL
 } from '../constants/FamilyMembersConstants';
 import baseURL from '../baseURL';
 
@@ -115,3 +118,35 @@ export const LinkFamilyMember = (body) => async (dispatch) => {
     });
   }
 };
+
+export const viewFamilyMemberAsPatient = (familyMemberId) => async (dispatch) => {
+  console.log(familyMemberId);
+  try {
+    dispatch({
+      type: VIEW_MEMBER_PATIENT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    };
+    
+    const { data } = await axios.get(`${baseURL}/api/v1/familyMembers/view-as-patient/${familyMemberId}`
+    , config);
+
+    dispatch({
+      type: VIEW_MEMBER_PATIENT_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: VIEW_MEMBER_PATIENT_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : 'Fetching patient details failed. Please try again.',
+    });
+  }
+}

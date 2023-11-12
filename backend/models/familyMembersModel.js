@@ -31,7 +31,8 @@ const FamilyMembersSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Patient',
         required:true
-    },linkedPatientId:{
+    },
+    linkedPatientId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Patient',
       //  required:true

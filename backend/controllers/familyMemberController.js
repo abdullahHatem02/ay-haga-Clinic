@@ -68,3 +68,30 @@ exports.viewRegisteredFamilyMembers = catchAsync(async (req, res,next) => {
     req.query["patientId"] = { "eq": patientId };
     handlerFactory.getAll(FamilyMember)(req,res,next);
 });
+
+exports.viewFamilyMemberAsPatient = async (req, res, next) => {
+  try {
+    const familyMemberId = req.params.familyMemberId;
+    const familyMember = await FamilyMember.findById(familyMemberId);
+
+    if (!familyMember) {
+      return res.status(404).json({ message: 'Family member not found' });
+    }
+
+    if (!familyMember.linkedPatientId) {
+      return res.status(400).json({ message: 'This family member is not registered as a patient' });
+    }
+
+    const patient = await Patient.findById(familyMember.linkedPatientId);
+
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    return res.status(200).json({ patient });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+

@@ -7,7 +7,10 @@ import {
     VIEW_FAMILY_MEMBERS_FAIL,
     LINK_FAMILY_MEMBER_REQUEST,
     LINK_FAMILY_MEMBER_SUCCESS,
-    LINK_FAMILY_MEMBER_FAIL
+    LINK_FAMILY_MEMBER_FAIL,
+    VIEW_MEMBER_PATIENT_REQUEST,
+    VIEW_MEMBER_PATIENT_SUCCESS,
+    VIEW_MEMBER_PATIENT_FAIL
 
 
   } from '../constants/FamilyMembersConstants';
@@ -105,5 +108,36 @@ import {
       default:
         return state;
     }
+  };
+
+  export const viewFamilyMemberAsPatientReducer= (state = initialState, action) => {
+    switch (action.type) {
+      case VIEW_MEMBER_PATIENT_REQUEST :
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case VIEW_MEMBER_PATIENT_SUCCESS:{
+        console.log(action.payload);
+        console.log("iwufq");
+        console.log("success")
+        return {
+          ...state,
+          familyMember: action.payload,
+          loading: false,
+          error: null,
+        }};
+      case VIEW_MEMBER_PATIENT_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
+    
+    
   };
   
