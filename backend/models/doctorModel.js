@@ -61,18 +61,20 @@ const DoctorSchema = new mongoose.Schema({
     },
     employmentContract:{
         hourlyRate:{ 
-        type: Number,
-        default : 0
-    },
-    status:{
-    type:String,
-        enum: ['pending', 'accepted','waitingadmin'],
-        default: 'waitingadmin'
-    },
-    clinicMarkUp:{
-        type : Number,
-        default : 0.1
-    }
+            type: Number,
+            default : 0
+        },
+
+        status:{
+            type:String,
+            enum: ['pending', 'accepted','waitingadmin'],
+            default: 'waitingadmin'
+        },
+
+        clinicMarkUp:{
+            type : Number,
+            default : 0.1
+        }
     }
 });
 DoctorSchema.statics.getAllSpecialities = async function () {

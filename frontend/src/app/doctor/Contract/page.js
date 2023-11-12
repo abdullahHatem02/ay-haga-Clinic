@@ -1,8 +1,37 @@
+'use client'
 import React from 'react';
-import Navbar from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
+import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { doctorViewContract, doctorAcceptContract } from "../../redux/actions/doctorActions";
+import { removeUser } from "../../redux/actions/userActions";
+
+//652db656d750751a50d24e0a 
 
 const ContractPage = () => {
+  // const dispatch = useDispatch();
+
+  // let doctorId;
+  // let userInfo;
+
+  // const doctorContract = useSelector((state) => state.doctorViewContractReducer.contract);
+
+  // if (localStorage) {
+  //   userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  //   doctorId = userInfo.data.user._id;
+  // }
+  // //reject - remove user id
+  // //approve - approve contact
+  
+  // useEffect(() => {
+  //   dispatch(doctorViewContract(doctorId));
+  // }, [dispatch, doctorContract]);
+  
+  // console.log(doctorId)
+  // console.log(doctorContract)
+
+
   return (
     <div className='w-100'>
       <Navbar />

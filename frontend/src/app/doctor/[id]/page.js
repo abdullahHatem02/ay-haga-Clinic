@@ -1,21 +1,23 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
 import React from "react";
-import { useEffect } from "react";
-import { viewDoctorDetails,doctorAddAvailableDate } from "../../redux/actions/doctorActions";
-import { viewDoctorDetails } from "../../redux/actions/doctorActions";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../../../components/Card";
 import { Button } from "../../../../components/Button";
-import { updateDoctor } from "../../redux/actions/doctorActions";
 import NavbarDoc from "../../../../components/NavbarDoc";
 import FooterDoc from "../../../../components/FooterDoc";
 import ChangePassword from '../../../../components/ChangePassword';
+import { viewDoctorDetails,doctorAddAvailableDate, updateDoctor } from "../../redux/actions/doctorActions";
 
 
 export default function DoctorProfile({ params }) {
   const dispatch = useDispatch();
+  
+  let date;
+  let permission;
+  let userInfo;
+  const id = params.id;
 
   const [edit, setedit] = useState(false);
   const [newEmail, setNewEmail] = useState("");
@@ -23,33 +25,35 @@ export default function DoctorProfile({ params }) {
   const [newAffiliation, setNewAffiliation] = useState("");
   const [newdoctor, setNewDoctor] = useState({});
   const [newDate, setNewDate] = useState("");
+
+  const doctor = useSelector((state) => state.doctorReducer.doctor);
   const isLoading = useSelector((state) => state.doctorAddAvailableDateReducer.loading);
+  
+
   useEffect(() => {
     dispatch(viewDoctorDetails(params.id));
   }, [dispatch, doctor, newEmail, newdoctor,isLoading]);
-
-  const doctor = useSelector((state) => state.doctorReducer.doctor);
-
-  let permission;
-  let userInfo;
-
+  
+  
   if (localStorage) {
     userInfo = JSON.parse(localStorage.getItem("userInfo"));
   }
   if (userInfo) {
     permission = userInfo.data.user.role;
   }
-  const id = params.id;
-  const handleDateChange= (e) =>{
-    console.log(e.target.value)
-    setNewDate(e.target.value);
+  if (doctor) {
+    date = formatDateToDDMMYYYY(doctor.DateOfbirth);
   }
   
-  const handleAddDate = () => {
-  console.log(newDate)
-  dispatch(doctorAddAvailableDate({availableDate:newDate}));
-  
+  function formatDateToDDMMYYYY(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based, so add 1.
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
   }
+  
 
   function DateCardList() {
     return (
@@ -69,13 +73,15 @@ export default function DoctorProfile({ params }) {
       </div>
     );
   }
-  function formatDateToDDMMYYYY(isoDate) {
-    const date = new Date(isoDate);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based, so add 1.
-    const year = date.getFullYear();
 
-    return `${day}-${month}-${year}`;
+  const handleDateChange= (e) =>{
+    console.log(e.target.value)
+    setNewDate(e.target.value);
+  }
+
+  const handleAddDate = () => {
+    console.log(newDate)
+    dispatch(doctorAddAvailableDate({availableDate:newDate}));
   }
 
   const handleEmailChange = (e) => {
@@ -110,17 +116,14 @@ export default function DoctorProfile({ params }) {
     setNewHourlyRate("");
     setNewAffiliation("");
   };
-  let date;
-  if (doctor) {
-    date = formatDateToDDMMYYYY(doctor.DateOfbirth);
-  }
+
 
   return (
     <>
     <NavbarDoc/>
       {doctor ? (
         <div className="m-5">
-          <div className=" d-flex mx-auto rounded shadow col-md-9 my-5">
+          <div className=" d-flex mx-auto rounded shadow col-md-9 m-5">
           <div className=" w-25 border-end ">
             <div className="p-3 border-bottom mx-auto">
               <div>
