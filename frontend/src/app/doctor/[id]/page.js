@@ -99,6 +99,15 @@ export default function DoctorProfile({ params }) {
                 <Image src="/profile.svg" height={200} width={200} />
               </div>
             </div>
+            <div className="p-3 border-bottom m-3">
+            <div className="py-2 d-flex ">
+                      <span className="fw-bold w-25 ">
+                        <Image src="/dollar.svg" height={25} width={25} />
+                       
+                      </span>
+                      <td colSpan="2">{doctor?.user?.wallet}</td>
+                    </div>
+            </div>
             <div className="py-2 d-flex">
               <span className="fw-bold w-25">Date Of Birth: </span>
 

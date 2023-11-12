@@ -56,6 +56,15 @@ export default function patientProfile({ params }) {
                 <Image src="/profile.svg" height={200} width={200} />
               </div>
             </div>
+            <div className="p-3 border-bottom m-3">
+            <div className="py-2 d-flex ">
+                      <span className="fw-bold w-25 ">
+                        <Image src="/dollar.svg" height={25} width={25} />
+                       
+                      </span>
+                      <td colSpan="2">{patient?.user?.wallet}</td>
+                    </div>
+            </div>
           </div>
           <div className="p-3 w-75">
             <div className="border-bottom d-flex ">

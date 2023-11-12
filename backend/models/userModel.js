@@ -32,6 +32,11 @@ const userSchema = new mongoose.Schema({
             message: 'Passwords are not the same!'
         }
     },
+    wallet: {
+      type: Number,
+      default: 0
+    } ,
+
     doctor :{
       type: Object
     },
