@@ -9,6 +9,8 @@ import NavbarDoc from "../../../../components/NavbarDoc";
 import FooterDoc from "../../../../components/FooterDoc";
 import ChangePassword from '../../../../components/ChangePassword';
 import { viewDoctorDetails,doctorAddAvailableDate, updateDoctor } from "../../redux/actions/doctorActions";
+import { doctorViewContract } from "../../redux/actions/doctorActions";
+import ContractPage from "../Contract/page";
 
 
 export default function DoctorProfile({ params }) {
@@ -28,12 +30,17 @@ export default function DoctorProfile({ params }) {
 
   const doctor = useSelector((state) => state.doctorReducer.doctor);
   const isLoading = useSelector((state) => state.doctorAddAvailableDateReducer.loading);
-  
+  const doctorContract = useSelector((state) => state.doctorViewContractReducer.contract);
+  const docStatus = doctorContract?.data.status;
 
   useEffect(() => {
     dispatch(viewDoctorDetails(params.id));
-  }, [dispatch, doctor, newEmail, newdoctor,isLoading]);
+    dispatch(doctorViewContract(params.id));
+  }, [dispatch, doctor, doctorContract, newEmail, newdoctor,isLoading]);
   
+  console.log(doctorContract)
+  console.log(docStatus)
+
   
   if (localStorage) {
     userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -119,7 +126,8 @@ export default function DoctorProfile({ params }) {
 
 
   return (
-    <>
+    <div>
+    {docStatus==="accepted" && (<div>
     <NavbarDoc/>
       {doctor ? (
         <div className="m-5">
@@ -271,9 +279,12 @@ export default function DoctorProfile({ params }) {
         </div>
         </div>
       ) : (
-        <div>hello</div>
+        <div>Loading...</div>
       )}
       <FooterDoc/>
-    </>
+    </div>)}
+    {(docStatus==='pending' || docStatus==='waitingadmin') && <ContractPage/>}
+    </div>
+
   );
 }
