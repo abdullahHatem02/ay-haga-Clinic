@@ -125,174 +125,166 @@ export default function DoctorProfile({ params }) {
 
   return (
     <div>
-      {docStatus === "accepted" && (
-        <div>
-          <NavbarDoc />
-          {doctor ? (
-            <div className="m-5">
-              <div className=" d-flex mx-auto rounded shadow col-md-9 m-5">
-                <div className=" w-25 border-end ">
-                  <div className="p-3 border-bottom mx-auto">
-                    <div>
-                      <Image src="/profile.svg" height={200} width={200} />
-                    </div>
-                  </div>
-                  <div className="p-5 w-75">
-                    <div className="border-bottom d-flex">
-                      <div className="w-75">
-                        <h1>{doctor.name}</h1>
-                        <p className="px-3 text-secondary">{doctor.speciality}</p>
-                      </div>
-                      <div className="w-25">
-                        {permission === "doctor" && (
-                          <Button
-                            text="Edit Information"
-                            variant="small"
-                            onClick={() => {
-                              setEdit(true);
-                              console.log("new doctor", newdoctor);
-                            }}
-                          ></Button>
-                        )}
-                      </div>
-                    </div>
-                    <div className="p-2 border-bottom row">
-                      <div className="p-3 col-md-6">
-                        <div className="text-body-secondary fw-bold small p-3 ">
-                          Doctor Information
-                        </div>
-                        <div className="py-3 d-flex">
-                          <span className="fw-bold w-25">
-                            <Image src="/mail-dark.svg" height={25} width={25} />
-                          </span>
-                          {edit || <span className="w-50">{doctor.email}</span>}
-                          <span className="w-50">
-                            {!edit || (
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder={doctor.email}
-                                value={newEmail}
-                                onChange={handleEmailChange}
-                              />
-                            )}
-                          </span>
-                        </div>
-                        <div className="py-2 d-flex ">
-                          <span className="fw-bold w-25 ">
-                            <Image src="/birthday.svg" height={25} width={25} />
-                          </span>
-                          <span className="w-50">{date}</span>
-                          <span className="w-50"></span>
-                        </div>
-                        <div className="py-2 d-flex ">
-                          <span className="fw-bold w-25 ">
-                            <Image src="/cart.svg" height={25} width={25} />
-                          </span>
-                          {edit || <span className="w-50">{doctor.HourlyRate}</span>}
-                          <span className="w-50">
-                            {!edit || (
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder={doctor.HourlyRate}
-                                value={newHourlyRate}
-                                onChange={handleHourlyRateChange}
-                              />
-                            )}
-                          </span>
-                        </div>
-                        <div className="py-2 d-flex ">
-                          <span className="fw-bold w-25 ">
-                            <Image src="/affiliation.svg" height={25} width={25} />
-                          </span>
-                          {edit || <span className="w-50">{doctor.affiliation}</span>}
-                          <span className="w-50">
-                            {!edit || (
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder={doctor.affiliation}
-                                value={newAffiliation}
-                                onChange={handleAffiliationChange}
-                              />
-                            )}
-                          </span>
-                        </div>
-                        <div className="py-2 d-flex">
-                          <span className="fw-bold w-25">
-                            <Image src="/education.svg" height={25} width={25} />
-                          </span>
-                          <span className="w-50">{doctor.educationalbackground}</span>
-                          <span className="w-50"></span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="text-body-secondary fw-bold small p-3 ">
-                          Available Dates
-                        </div>
-                        <div className="col-md-3">
-                          <input
-                            type="datetime-local"
-                            id="appointmentdate"
-                            name="appointmentdate"
-                            className="search-input"
-                            onChange={(e) => {
-                              handleDateChange(e);
-                            }}
-                          />
-                        </div>
-                        <br></br>
-                        <Button
-                          text="Add Available Date"
-                          variant="xs"
-                          onClick={() => handleAddDate()}
-                        ></Button>
-                        <DateCardList />
-                      </div>
-                    </div>
-                    {!edit || (
-                      <div className="col-md-4 mx-auto">
-                        <Button
-                          text="Cancel"
-                          variant="small"
-                          color="danger"
-                          onClick={() => {
-                            setEdit(false);
-                          }}
-                          className="mx-1 my-2"
-                        ></Button>
-                        <Button
-                          text="Submit"
-                          variant="small"
-                          onClick={() => {
-                            handleSubmit();
-                            setEdit(false);
-                          }}
-                          className="mx-1 my-2"
-                        ></Button>
-                      </div>
-                    )}
-                    <div>
-                      <div className="text-body-secondary fw-bold small p-3 ">
-                        Available Dates
-                      </div>
-                      <DateCardList />
-                    </div>
-                  </div>
-                </div>
+    {docStatus==="accepted" && (<div>
+    <NavbarDoc/>
+      {doctor ? (
+        <div className="m-5">
+          <div className=" d-flex mx-auto rounded shadow col-md-9 m-5">
+          <div className=" w-25 border-end ">
+            <div className="p-3 border-bottom mx-auto">
+              <div>
+                <Image src="/profile.svg" height={200} width={200} />
               </div>
             </div>
-          ) : (
-            <div>Loading...</div>
-          )}
-          <FooterDoc />
+            <div className="mx-auto">
+              <ChangePassword className='h-100 '/>
+            </div>
+          </div>
+          <div className="p-5 w-75">
+            <div className="border-bottom d-flex">
+              <div className="w-75">
+                <h1>{doctor.name}</h1>
+                <p className="px-3 text-secondary">{doctor.speciality}</p>
+              </div>
+              <div className="w-25">
+                {permission == "doctor" && (
+                  <Button
+                    text="Edit Information"
+                    variant="small"
+                    onClick={() => {
+                      setedit(true);
+                      console.log("new doctor", newdoctor);
+                    }}
+                  ></Button>
+                )}
+              </div>
+            </div>
+            <div className="p-2 border-bottom row">
+              <div className="p-3 col-md-6">
+              <div className="text-body-secondary fw-bold small p-3 ">
+                Doctor Information
+              </div>
+                <div className="py-3 d-flex">
+                  <span className="fw-bold w-25">
+                    <Image src="/mail-dark.svg" height={25} width={25} />
+                  </span>
+                  {edit || <span className="w-50">{doctor.email}</span>}
+                  <span className="w-50">
+                    {!edit || (
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder={doctor.email}
+                        value={newEmail}
+                        onChange={handleEmailChange}
+                      />
+                    )}
+                  </span>
+                </div>
+                <div className="py-2 d-flex ">
+                  <span className="fw-bold w-25 ">
+                    <Image src="/birthday.svg" height={25} width={25} />
+                  </span>
+                  <span className="w-50">{date}</span>
+                  <span className="w-50"></span>
+                </div>
+                <div className="py-2 d-flex ">
+                  <span className="fw-bold w-25 ">
+                    <Image src="/cart.svg" height={25} width={25} />
+                  </span>
+                  {edit || <span className="w-50">{doctor.HourlyRate}</span>}
+                  <span className="w-50">
+                    {!edit || (
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder={doctor.HourlyRate}
+                        value={newHourlyRate}
+                        onChange={handleHourlyRateChange}
+                      />
+                    )}
+                  </span>
+                </div>
+                <div className="py-2 d-flex ">
+                  <span className="fw-bold w-25 ">
+                    <Image src="/affiliation.svg" height={25} width={25} />
+                  </span>
+                  {edit || <span className="w-50">{doctor.affiliation}</span>}
+                  <span className="w-50">
+                    {!edit || (
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder={doctor.affiliation}
+                        value={newAffiliation}
+                        onChange={handleAffiliationChange}
+                      />
+                    )}
+                  </span>
+                </div>
+                <div className="py-2 d-flex">
+                  <span className="fw-bold w-25">
+                    <Image src="/education.svg" height={25} width={25} />
+                  </span>
+                  <span className="w-50">{doctor.educationalbackground}</span>
+                  <span className="w-50"></span>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-body-secondary fw-bold small p-3 ">
+                  Available Dates
+                </div>
+                <div className='col-md-3'>
+          <input type="datetime-local" id="appointmentdate" name="appointmentdate" 
+             className='search-input'onChange={(e) => {handleDateChange(e)}}/>
         </div>
+        <br></br>
+        <Button text="Add Available Date" variant="xs" onClick={()=>handleAddDate()}></Button>
+                <DateCardList />
+              </div>
+            </div>
+            {!edit || (
+              <div className="col-md-4 mx-auto">
+                <Button
+                  text="Cancel"
+                  variant="small"
+                  color="danger"
+                  onClick={() => {
+                    setedit(false);
+                  }}
+                  className='mx-1 my-2'
+                ></Button>
+                <Button
+                  text="Submit"
+                  variant="small"
+                  onClick={() => {
+                    handleSubmit();
+                    setedit(false);
+                  }}
+                  className='mx-1 my-2'
+                ></Button>
+              </div>
+            )}
+              <div>
+                <div className="text-body-secondary fw-bold small p-3 ">
+                  Available Dates
+                </div>
+                <DateCardList />
+              </div>
+            
+          </div>
+        </div>
+        </div>
+      ) : (
+        <div>Loading...</div>
       )}
-      {(docStatus === "pending" || docStatus === "waitingadmin") && (
-        <ContractPage />
-      )}
+      <FooterDoc/>
+    </div>)}
+    {(docStatus==='pending' || docStatus==='waitingadmin') && <ContractPage/>}
     </div>
+
   );
 }
+
+
