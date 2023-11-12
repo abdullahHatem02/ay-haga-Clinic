@@ -11,7 +11,10 @@ import {
   LINK_FAMILY_MEMBER_FAIL,
   VIEW_MEMBER_PATIENT_REQUEST,
   VIEW_MEMBER_PATIENT_SUCCESS,
-  VIEW_MEMBER_PATIENT_FAIL
+  VIEW_MEMBER_PATIENT_FAIL,
+  VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_REQUEST,
+  VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_SUCCESS,
+  VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_FAIL,
 } from '../constants/FamilyMembersConstants';
 import baseURL from '../baseURL';
 
@@ -150,3 +153,32 @@ export const viewFamilyMemberAsPatient = (familyMemberId) => async (dispatch) =>
     });
   }
 }
+export const viewAllFamilyMembersAndPatients = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    };
+
+    const { data } = await axios.get(`${baseURL}/api/v1/familyMembers/view-all-family-members`, config);
+
+    dispatch({
+      type: VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : 'Fetching family members and patient details failed. Please try again.',
+    });
+  }
+};

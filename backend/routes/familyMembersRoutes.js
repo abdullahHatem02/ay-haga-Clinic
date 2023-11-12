@@ -20,5 +20,6 @@ router.post(
 );
 router.route("/").get(authController.restrictTo('patient'),familyMemberController.viewRegisteredFamilyMembers);
 router.get('/view-as-patient/:familyMemberId', familyMemberController.viewFamilyMemberAsPatient);
+router.get('/view-all-family-members', familyMemberController.viewAllFamilyMembersAndPatients);
 
 module.exports = router;

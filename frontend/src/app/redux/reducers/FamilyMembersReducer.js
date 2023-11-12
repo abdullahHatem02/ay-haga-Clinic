@@ -10,7 +10,10 @@ import {
     LINK_FAMILY_MEMBER_FAIL,
     VIEW_MEMBER_PATIENT_REQUEST,
     VIEW_MEMBER_PATIENT_SUCCESS,
-    VIEW_MEMBER_PATIENT_FAIL
+    VIEW_MEMBER_PATIENT_FAIL,
+    VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_FAIL,
+    VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_REQUEST,
+    VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_SUCCESS
 
 
   } from '../constants/FamilyMembersConstants';
@@ -139,5 +142,31 @@ import {
     }
     
     
+  };
+
+  export const viewAllFamilyMembersAndPatientsReducer = (state = initialState3, action) => {
+    switch (action.type) {
+      case VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_SUCCESS:
+        return {
+          ...state,
+          familyMembersWithPatients: action.payload,
+          loading: false,
+          error: null,
+        };
+      case VIEW_ALL_FAMILY_MEMBERS_AND_PATIENTS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
   };
   
