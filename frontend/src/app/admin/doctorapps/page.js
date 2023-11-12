@@ -5,7 +5,6 @@ import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import {login} from '@/app/redux/actions/authActions'
 import { getDoctorsForPatientAction,adminAcceptDoctor} from '@/app/redux/actions/doctorActions';
-import { getDoctorsForPatientAction } from '@/app/redux/actions/doctorActions';
 import { removeUser } from '@/app/redux/actions/userActions';
 import Image from 'next/image';
 
@@ -83,8 +82,11 @@ export default function DoctorApps() {
           <h8 className="global-text" style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalbackground}
           <br />
           </div>
-          <Button text='Approve' variant='xs' onClick={()=>onApproveHandler(person._id)}></Button>
-          <Button text='Reject' variant='xs' onClick={()=>onRemoveHandler(person.user?._id)}></Button>
+          <hr />
+          <div className="row mx-auto">
+          <Button className='col-md-3 mx-auto' text='Reject' variant='xs' color='dark' onClick={()=>onRemoveHandler(person.user?._id)}></Button>
+          <Button className='col-md-3 mx-auto' text='Approve' variant='xs' color='primary' onClick={()=>onApproveHandler(person._id)}></Button>
+          </div>
         </Card></div>
       })
        }

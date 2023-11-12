@@ -57,32 +57,32 @@ const ContractPage = () => {
 
 
   return (
-    <div className='w-100'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
-        <div className="container d-flex flex-row justify-content-between align-items-center w-100">
-        <Image src="/chevron.svg" width={20} height={20} className='mx-3 rotate-90 pt-2 pointer-cursor' onClick={goBack} ></Image>
-          <div className="title col-md-6">
-            <div className="logo"></div>
-            <h1>
-              <label className="navbar-brand">
-                XClinics
-              </label>
-            </h1>
+      <div className='w-100'>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+          <div className="container d-flex flex-row justify-content-between align-items-center w-100">
+          <Image src="/chevron.svg" width={20} height={20} className='mx-3 rotate-90 pt-2 pointer-cursor' onClick={goBack} ></Image>
+            <div className="title col-md-6">
+              <div className="logo"></div>
+              <h1>
+                <label className="navbar-brand">
+                  XClinics
+                </label>
+              </h1>
+            </div>
+            <div
+              className={`links&buttons collapse navbar-collapse col-md-6 show`}
+            >
+              <ul className=" navbar-nav container d-flex justify-content-end me-auto">
+                <li className="nav-item rounded ms-2">
+                  <a className="btn btn-primary text-light mx-1" href="/guest/Login" onClick={(e)=> localStorage.clear()}>
+                  Log Out
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div
-            className={`links&buttons collapse navbar-collapse col-md-6 show`}
-          >
-            <ul className=" navbar-nav container d-flex justify-content-end me-auto">
-              <li className="nav-item rounded ms-2">
-                <a className="btn btn-primary text-light mx-1" href="/guest/Login" onClick={(e)=> localStorage.clear()}>
-                Log Out
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div>
+        </nav>
+        <div>
         {doctorContract.data.status === 'pending' ? (
               <div className="page-div container justify-content-center align-items-center m-5 mx-auto">
               <h1 className="text-primary text-center"><strong>Employment Contract</strong></h1>
@@ -149,8 +149,8 @@ const ContractPage = () => {
                 </p>
               <hr />
               <div className='row mt-5'>
-                <Button onClick={(e)=>handleAccept(e)} variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
                 <Button onClick={(e)=>handleReject(e)} variant='md' className='col-md-3 px-3 btn btn-dark mx-auto' color='dark'>Reject</Button>
+                <Button onClick={(e)=>handleAccept(e)} variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
               </div>
               </div>
             </div>) : (
