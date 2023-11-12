@@ -11,7 +11,7 @@ export default function DoctorsPage(doctors, admin) {
     const dispatch=useDispatch();
 
     const handleCardClick = (doctor) => {
-      window.history.pushState({},"",`/doctor/${doctor._id}`)
+      window.history.pushState({},"",`/patient/Appointments/${doctor._id}`)
       window.location.reload()
      };
 
