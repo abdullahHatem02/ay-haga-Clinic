@@ -37,9 +37,7 @@ export default function DoctorProfile({ params }) {
     dispatch(viewDoctorDetails(params.id));
     dispatch(doctorViewContract(params.id));
   }, [dispatch, doctor, doctorContract, newEmail, newdoctor,isLoading]);
-  
-  console.log(doctorContract)
-  console.log(docStatus)
+
 
   
   if (localStorage) {

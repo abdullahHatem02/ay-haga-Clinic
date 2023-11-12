@@ -32,7 +32,6 @@ import baseURL from '../baseURL';
 import { formulateQueryString } from '../queryStringBuilder';
 
 export const viewDoctorDetails = (doctorId) => async (dispatch) => {
-  console.log(doctorId);
   try {
     dispatch({
       type: DOCTOR_REQUEST,
@@ -309,7 +308,6 @@ export const doctorAcceptContract = (doctorId) => async (dispatch) => {
     let url ="";
     
     url=`${baseURL}/api/v1/doctor/acceptcontract`
-    
     const { data } = await axios.patch(url, config);
 
     dispatch({
@@ -317,7 +315,7 @@ export const doctorAcceptContract = (doctorId) => async (dispatch) => {
       payload: data.data
     });
   } catch (error) {
-   
+    console.log(error)
     dispatch({
       type: DOCTOR_ACCEPTCONTRACT_FAIL,
       payload: error.response

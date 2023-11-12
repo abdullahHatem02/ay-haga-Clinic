@@ -36,15 +36,13 @@ const ContractPage = () => {
     dispatch(doctorViewContract(doctorId));
   }, [dispatch, doctorContract]);
   
-  console.log(doctorId)
-  console.log(doctorContract)
 
   const handleAccept = (e) =>{
     e.preventDefault();
     console.log('accepted')
     dispatch(doctorAcceptContract(doctorId))
-    window.history.pushState({},"",`/doctor/${doctorId}`)
-    window.location.reload()
+    // window.history.pushState({},"",`/doctor/${doctorId}`)
+    // window.location.reload()
   }
 
   const handleReject = (e) =>{
@@ -58,7 +56,7 @@ const ContractPage = () => {
 
   return (
       <div className='w-100'>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light col-md-12">
           <div className="container d-flex flex-row justify-content-between align-items-center w-100">
           <Image src="/chevron.svg" width={20} height={20} className='mx-3 rotate-90 pt-2 pointer-cursor' onClick={goBack} ></Image>
             <div className="title col-md-6">
@@ -69,10 +67,8 @@ const ContractPage = () => {
                 </label>
               </h1>
             </div>
-            <div
-              className={`links&buttons collapse navbar-collapse col-md-6 show`}
-            >
-              <ul className=" navbar-nav container d-flex justify-content-end me-auto">
+            <div className={`links&buttons collapse navbar-collapse col-md-6 show`}>
+              <ul className=" navbar-nav container d-flex justify-content-end ms-auto">
                 <li className="nav-item rounded ms-2">
                   <a className="btn btn-primary text-light mx-1" href="/guest/Login" onClick={(e)=> localStorage.clear()}>
                   Log Out
@@ -89,13 +85,13 @@ const ContractPage = () => {
               <h3 className='text-center'>XClinics Clinic</h3>
               <div className='d-flex justify-content-center align-items-center'><hr className='w-50'/></div>
               <div className="card bg-light rounded shadow p-5 m-5 border-0 align-self-center mx-auto">
-                <h4 className='text-primary'>Contract Overview</h4>
+                <h4 className='text-primary text-semibold'>Contract Overview</h4>
                 <p>
-                  This employment contract outlines the terms and conditions of employment for doctors at XClinics. It includes details on job responsibilities, work hours, compensation, and the terms of employment termination.
+                  <strong>This employment contract outlines the terms and conditions</strong> of employment for doctors at XClinics. It includes details on job responsibilities, work hours, compensation, and the terms of employment termination.
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Responsibilities</h4>
+                <h4 className='text-primary text-semibold'>Responsibilities</h4>
                 <p>
                   Doctors are expected to provide the <strong>highest standard</strong> of medical care to our patients and adhere to the medical and <strong>ethical guidelines</strong> set forth by the clinic which include:
                   <br />
@@ -104,7 +100,7 @@ const ContractPage = () => {
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Compensation and Benefits</h4>
+                <h4 className='text-primary text-semibold'>Compensation and Benefits</h4>
                 <p>
                   Employee will be compensated an <strong>hourly rate of {doctorContract?.data.hourlyRate}</strong> which will be subject to a <strong>{doctorContract?.data.clinicMarkUp * 100}% clinic markup</strong>.
                   <br />
@@ -112,7 +108,7 @@ const ContractPage = () => {
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Work Hours and Vacation</h4>
+                <h4 className='text-primary text-semibold'>Work Hours and Vacation</h4>
                 <p>
                 Regular work hours will be <strong>Sunday through Thursday, 10:00 AM to 7:00 PM.</strong>
                 <br />
@@ -120,7 +116,7 @@ const ContractPage = () => {
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Confidentiality and Non-Compete</h4>
+                <h4 className='text-primary text-semibold'>Confidentiality and Non-Compete</h4>
                 <p>
                 Employee agrees to maintain the <strong>confidentiality</strong> of all patient records and clinic-related information <strong>during and after employment</strong>.
                 <br />
@@ -128,17 +124,17 @@ const ContractPage = () => {
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Termination</h4>
+                <h4 className='text-primary text-semibold'>Termination</h4>
                 <p>
                 Either party may terminate this Contract with written <strong>notice of 30 days</strong>.
                 <br />
-                Grounds for termination may include but are not limited to violation of clinic policies, unsatisfactory performance, or any breach of this Contract.
+                <strong>Grounds for termination</strong> may include but are not limited to violation of clinic policies, unsatisfactory performance, or any breach of this Contract.
                 </p>
                 <br />
       
-                <h4 className='text-primary'>Acceptance</h4>
+                <h4 className='text-primary text-semibold'>Acceptance</h4>
                 <p>
-                  By signing this contract, both parties acknowledge and agree to the terms and conditions outlined above.
+                  By accepting this contract, both parties <strong>acknowledge and agree to the terms and conditions</strong> outlined above.
                 </p>
                 <br />
       
