@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { viewDoctorDetails } from '../../../redux/actions/doctorActions';
 import ReserveModal from '../../../../../components/ReserveModal';
 
+
 export default function AvailableDates({ params }) {
     const dispatch = useDispatch();
     const doctor = useSelector(state => state.doctorReducer.doctor);
@@ -49,6 +50,7 @@ export default function AvailableDates({ params }) {
             </div>
         );
     }
+
 
     return (
         <div className="m-5 p-5 bg-white shadow-md rounded-lg">
