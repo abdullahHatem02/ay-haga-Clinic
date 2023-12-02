@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect } from 'react';
 import { Card } from './Card';
+import { Alert } from 'react-bootstrap';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '@/app/redux/actions/userActions';

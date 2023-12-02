@@ -17,6 +17,8 @@ const {doctor}=props;
   let userInfo;
 
   const doctorContract = useSelector((state) => state.doctorViewContractReducer.contract);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
   const rejectionisLoading=useSelector(state=>state.rejectDoctorReducer.loading);
   const docStatus = doctor?.employmentContract?.status;
   if (localStorage) {
@@ -44,6 +46,10 @@ const {doctor}=props;
     e.preventDefault();
    // console.log('accepted')
     dispatch(doctorAcceptContract(userId))
+    setShowSuccessAlert(true);
+    setTimeout(() => {
+      setShowSuccessAlert(false);
+    }, 5000);
     window.history.pushState({},"",`/doctor/${doctorId}`)
 	  window.location.reload()
   }
@@ -148,10 +154,15 @@ const {doctor}=props;
                   This contract is valid as of November 2023.
                   </strong>
                 </p>
+                {showSuccessAlert && (
+            <div className="alert alert-success" role="alert">
+              Contract accepted successfully!
+            </div>
+          )}
               <hr />
               <div className='row mt-5'>
                 <Button onClick={(e)=>handleReject(e)} variant='md' className='col-md-3 px-3 btn btn-dark mx-auto' color='dark'>Reject</Button>
-                <Button onClick={(e)=>handleAccept(e)} variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
+                <Button onClick={(e)=>handleAccept(e) } variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
               </div>
               </div>
             </div>) : (docStatus === 'waitingadmin' ? (
@@ -173,7 +184,7 @@ const {doctor}=props;
               <br /> We wish you the best of luck in your future endevours.</h5>
             </div>): (docStatus === 'Doctor rejected' && ( 
             <div>
-              <br />
+              <br /> 
               <br />
               <h1 className="text-primary text-center mt-5"><strong>Application Terminated</strong></h1>
               <h3 className='text-center'>You have terminated your application process.</h3>
