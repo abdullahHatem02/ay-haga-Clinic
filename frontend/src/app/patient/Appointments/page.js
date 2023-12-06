@@ -79,7 +79,7 @@ function appointments() {
           <>
             <div>
               <div className="bg-white p-3 w-100 border-bottom d-flex justify-content-between">
-                <div className="col-md-1">
+                <div className="">
                   <Image
                     src="/filter.svg"
                     height={30}
@@ -87,7 +87,7 @@ function appointments() {
                     className=""
                   />
                 </div>
-                <div className="status-filter col-md-3">
+                <div className="status-filter ">
                   <select
                     onChange={handleStatusChange}
                     className="w-100 form-control text-muted p-2"
@@ -100,15 +100,21 @@ function appointments() {
                     <option value="Rescheduled">Rescheduled</option>
                   </select>
                 </div>
-                <div className="col-md-4 text-muted p-2">
+                <div className=" text-muted p-2">
                   <input
                     type="datetime-local"
                     value={selectedDate}
                     onChange={handleDateChange}
                     placeholder="Filter by date/time"
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #dee2e6",
+                      borderRadius: "5px",
+                      padding: "5px",
+                    }}
                   />
                 </div>
-                <div className="col-md-3 ms-auto">
+                <div className="">
                   <Button className="w-60 ms-5" onClick={handleClearFilters}>
                     Clear Filters
                   </Button>
@@ -120,8 +126,8 @@ function appointments() {
           </>
         )}
         {!isLoading && apps && apps.length === 0 && (
-          <div className="w-100 text-center">
-            <h1>No appointments available at this time!</h1>
+          <div className="w-100 text-center text-muted fs-3">
+            No appointments available at this time!
           </div>
         )}
 
