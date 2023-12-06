@@ -211,9 +211,9 @@ const PatientProfile = ({ params }) => {
               {role === "patient" && (
                 <div className="ps-4 py-2 d-flex  text-center border-bottom mx-auto mt-3 bg-primary ">
                   <span className="fw-bold w-25">
-                    <Image src="/dollar.svg" height={30} width={30} />
+                    <Image src="/dollar.svg" height={35} width={35} />
                   </span>
-                  <span className="w-50 fs-4 text-light">
+                  <span className="w-50 fs-3 text-light">
                     {patient?.user?.wallet}
                     <span className=" fs-6">$</span>
                   </span>
