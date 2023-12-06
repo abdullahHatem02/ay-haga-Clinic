@@ -254,7 +254,8 @@ const Register = () => {
                                   className="border-light"
                                   onClick={() =>
                                     togglePasswordVisibility("password")
-                                  }>
+                                  }
+                                >
                                   <Image
                                     src={
                                       showPassword ? "/hide.svg" : "/show.svg"
@@ -290,7 +291,8 @@ const Register = () => {
                                   className="border-light"
                                   onClick={() =>
                                     togglePasswordVisibility("passwordConfirm")
-                                  }>
+                                  }
+                                >
                                   <Image
                                     src={
                                       showPasswordConfirm
@@ -317,7 +319,8 @@ const Register = () => {
                                 name="gender"
                                 value={formData.gender}
                                 onChange={handleInputChange}
-                                required>
+                                required
+                              >
                                 <option value="" disabled>
                                   Select...
                                 </option>
@@ -347,15 +350,12 @@ const Register = () => {
                           </Col>
                         </Row>
                       </div>
-                      <hr className="w-50 mx-auto mb-5" />
                       <div className="mx-2">
-                        <h4 className="text-global">
-                          Emergency Contact Details
-                        </h4>
-                        <h6 className="text-primary mb-4 text-muted">
+                        <h4 className="fs-5 ">Emergency Contact Details</h4>
+                        {/* <h6 className="mb-4 text-muted">
                           We will contact this person in case of any
                           emergencies.
-                        </h6>
+                        </h6> */}
                         <div className="row px-2">
                           <Row className="py-2">
                             <Col>
@@ -407,7 +407,8 @@ const Register = () => {
                             <span
                               className="spinner-border spinner-border-sm"
                               role="status"
-                              aria-hidden="true"></span>
+                              aria-hidden="true"
+                            ></span>
                             Loading...
                           </Button>
                         ) : (

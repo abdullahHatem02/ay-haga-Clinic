@@ -10,16 +10,15 @@ import { authedAction } from "../redux/actions/authActions";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
-
 export default function RootLayout({ children }) {
   const dispatch = useDispatch();
-  dispatch(authedAction('patient'));
+  dispatch(authedAction("patient"));
   const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
 
   return (
     <div
       className={`global-text ${inter.className} min-vh-100 d-flex flex-column`}
+      style={{ backgroundColor: "#f5f7fa" }}
     >
       {role === "patient" && <NavbarPatient />}
       {role === "doctor" && <NavbarDoc />}

@@ -184,180 +184,197 @@ const PatientProfile = ({ params }) => {
   return (
     <>
       {patient ? (
-        <div className=" d-flex mx-auto rounded shadow col-md-9 my-3 ">
-          <div className=" w-25 border-end">
-            <div className="p-3 border-bottom m-3">
-              <div className="image-container">
-                <Image
-                  src="/profile.svg"
-                  alt="Profile"
-                  layout="intrinsic"
-                  width={200}
-                  height={200}
-                />
-              </div>
-            </div>
-            {role === "patient" && (
-              <div className="ps-4 py-2 d-flex  text-center border-bottom mx-auto">
-                <span className="fw-bold w-25">
-                  <Image src="/dollar.svg" height={30} width={30} />
-                </span>
-                <span className="w-50 fs-4">{patient?.user?.wallet}</span>
-              </div>
-            )}
-            <div className="mx-auto">
-              {role === "patient" && <ChangePassword className="h-100 " />}
-            </div>
+        <>
+          <div className="position-absolute z-0 w-100 h-25 p-3">
+            {" "}
+            {/* <Image
+              src="/patient-bg.jpg"
+              alt="Profile"
+              layout="intrinsic"
+              width={3000}
+              height={200}
+            /> */}
           </div>
-          <div className="p-3 w-75 my-3">
-            <div className="border-bottom d-flex ">
-              <div className="w-75">
-                <h1 className=" ms-2 text-primary fw-bold text-capitalize">
-                  {patient.name}
-                </h1>
+          <div className=" d-flex z-1 position-relative mx-auto col-md-9  my-5 ">
+            <div className=" w-25  bg-light me-3  rounded shadow">
+              <div className=" p-3  m-3">
+                <div className="image-container">
+                  <Image
+                    src="/profile.svg"
+                    alt="Profile"
+                    layout="intrinsic"
+                    width={200}
+                    height={200}
+                  />
+                </div>
+              </div>
+              {role === "patient" && (
+                <div className="ps-4 py-2 d-flex  text-center border-bottom mx-auto mt-3 bg-primary ">
+                  <span className="fw-bold w-25">
+                    <Image src="/dollar.svg" height={30} width={30} />
+                  </span>
+                  <span className="w-50 fs-4 text-light">
+                    {patient?.user?.wallet}
+                    <span className=" fs-6">$</span>
+                  </span>
+                </div>
+              )}
+              <div className="mx-auto">
+                {role === "patient" && <ChangePassword className="h-100 " />}
               </div>
             </div>
-
-            <div className="p-2 ">
-              <div className="d-flex">
-                <div className="w-60 ">
-                  <h2 className="text-global fw-bold small pt-3 p-1 me-3">
-                    Patient Information
-                  </h2>
-                  <hr className="w-50" />
-
-                  <div className="p-2 pt-0 mx-3">
-                    <div className="py-2 d-flex ">
-                      <span className="fw-bold w-25">
-                        <Image src="/person.svg" height={25} width={25} />
-                      </span>
-                      <span className="w-50">{patient.gender}</span>
-                    </div>
-                    <div className="py-2 d-flex ">
-                      <span className="fw-bold w-25 ">
-                        <Image src="/birthday.svg" height={25} width={25} />
-                      </span>
-                      <span>{date}</span>
-                    </div>
-                    <div className="py-2 d-flex">
-                      <span className="fw-bold w-25">
-                        <Image src="/phone-dark.svg" height={25} width={25} />{" "}
-                      </span>
-                      <span>{patient.mobileNumber}</span>
-                    </div>
-                    <div className="py-2 d-flex">
-                      <span className="fw-bold w-25">
-                        <Image src="/mail-dark.svg" height={25} width={25} />
-                      </span>
-                      <span className="w-50">{patient.email}</span>
-                    </div>
-                  </div>
+            <div className="px-5 w-75 py-5 bg-white  rounded shadow">
+              <div className="border-bottom d-flex ">
+                <div className="w-75">
+                  <h1 className=" ms-2 text-primary fw-bold text-capitalize">
+                    {patient.name}
+                  </h1>
                 </div>
-                <div className="ms-5 w-50">
-                  {role === "patient" && (
-                    <div>
-                      <h2 className="text-global fw-bold small p-1 pt-3">
-                        Health Package
-                      </h2>
-                      <hr className="w-50" />
-                      {JSON.parse(localStorage.getItem("userInfo")).data.user
-                        .role === "patient" && (
-                        <div className="pb-2 d-flex">
-                          <span className="px-3 fw-bold text-muted">
-                            {patient.package ? patient.package.name : "none"}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  <div className="w-100">
-                    <h2 className="text-global fw-bold small pt-3 p-1">
-                      Emergency Contact
+              </div>
+
+              <div className="p-2 ">
+                <div className="d-flex">
+                  <div className="w-100 ">
+                    <h2 className="text-global fw-bold small pt-3 p-1 me-3">
+                      Patient Information
                     </h2>
                     <hr className="w-50" />
-                    <div className="col-md-9">
-                      <div className="card global-text shadow border-0">
-                        <div className="card-body">
-                          <h5
-                            className="text-primary"
-                            style={{ fontWeight: "bold", fontSize: "20px" }}
-                          >
-                            {patient.emergencyContact?.fullName}
-                          </h5>
-                          <h6 className="card-subtitle mb-2 text-muted">
-                            {patient.emergencyContact?.mobileNumber}
-                          </h6>
+
+                    <div className="p-2 pt-0 mx-3">
+                      <div className="py-2 d-flex ">
+                        <span className="fw-bold w-25">
+                          <Image src="/person.svg" height={25} width={25} />
+                        </span>
+                        <span className="w-50">{patient.gender}</span>
+                      </div>
+                      <div className="py-2 d-flex ">
+                        <span className="fw-bold w-25 ">
+                          <Image src="/birthday.svg" height={25} width={25} />
+                        </span>
+                        <span>{date}</span>
+                      </div>
+                      <div className="py-2 d-flex">
+                        <span className="fw-bold w-25">
+                          <Image src="/phone-dark.svg" height={25} width={25} />{" "}
+                        </span>
+                        <span>{patient.mobileNumber}</span>
+                      </div>
+                      <div className="py-2 d-flex">
+                        <span className="fw-bold w-25">
+                          <Image src="/mail-dark.svg" height={25} width={25} />
+                        </span>
+                        <span className="w-50">{patient.email}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ms-5 w-100">
+                    {role === "patient" && (
+                      <div>
+                        <h2 className="text-global fw-bold small p-1 pt-3">
+                          Health Package
+                        </h2>
+                        <hr className="w-50" />
+                        {JSON.parse(localStorage.getItem("userInfo")).data.user
+                          .role === "patient" && (
+                          <div className="pb-2 d-flex">
+                            <span className="px-3 fw-bold text-muted">
+                              {patient.package ? patient.package.name : "none"}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="w-100">
+                      <h2 className="text-global fw-bold small pt-3 p-1">
+                        Emergency Contact
+                      </h2>
+                      <hr className="w-50" />
+                      <div className="col-md-9">
+                        <div className="card global-text shadow border-0">
+                          <div className="card-body">
+                            <h5
+                              className="text-primary"
+                              style={{ fontWeight: "bold", fontSize: "20px" }}
+                            >
+                              {patient.emergencyContact?.fullName}
+                            </h5>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                              {patient.emergencyContact?.mobileNumber}
+                            </h6>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <br />
-              <div>
-                <div className="text-global fw-bold small pt-3 p-1">
-                  Health Records
+                <br />
+                <div className="pb-2">
+                  <div className="text-global fw-bold small pt-3 p-1">
+                    Health Records
+                  </div>
+                  <hr className="w-100" />
+                  <HealthRecords />
                 </div>
-                <hr className="w-50" />
-                <HealthRecords />
-              </div>
-              <div>
-                <div className="text-global fw-bold small pt-3 p-1 mt-3">
-                  Medical Records <hr className="w-50" />
-                  {role === "patient" && (
-                    <>
-                      <div className="row text-muted px-3  mb-4">
-                        Note that all uploaded files should be in following
-                        formats: PDF, JPEG, JPG, PNG.
-                      </div>
-                      {uploadSuccess && !error && (
-                        <Alert variant="success" dismissible className="px-2">
-                          <strong>Success! </strong> File uploaded successfully.
-                        </Alert>
-                      )}
-                      {error.error && (
-                        <Alert variant="danger" dismissible className="px-2">
-                          <strong>Error! </strong> File was not uploaded, try
-                          again later.
-                        </Alert>
-                      )}
-                      {fileDeleted && (
-                        <Alert
-                          variant="success"
-                          dismissible
-                          onDismiss={() => {}}
-                          className="px-2"
-                        >
-                          <strong>Success! </strong> File deleted successfully.
-                        </Alert>
-                      )}
-                      <div className="row my-4">
-                        <div className="col-md-6">
-                          <input
-                            className="col-md-3 form-control"
-                            type="file"
-                            onChange={(e) => handleFileChange(e, patient._id)}
-                            id="formFile"
-                          />{" "}
+                <div>
+                  <div className="text-global fw-bold small pt-3 p-1 mt-3">
+                    Medical Records <hr className="w-100" />
+                    {role === "patient" && (
+                      <>
+                        <div className="row text-muted px-3  mb-4">
+                          Note that all uploaded files should be in following
+                          formats: PDF, JPEG, JPG, PNG.
                         </div>
-                        <div className="col-md-4">
-                          <Button
-                            onClick={handleFileUpload}
-                            className="ms-3"
-                            size="md"
+                        {uploadSuccess && !error && (
+                          <Alert variant="success" dismissible className="px-2">
+                            <strong>Success! </strong> File uploaded
+                            successfully.
+                          </Alert>
+                        )}
+                        {error.error && (
+                          <Alert variant="danger" dismissible className="px-2">
+                            <strong>Error! </strong> File was not uploaded, try
+                            again later.
+                          </Alert>
+                        )}
+                        {fileDeleted && (
+                          <Alert
+                            variant="success"
+                            dismissible
+                            onDismiss={() => {}}
+                            className="px-2"
                           >
-                            Upload
-                          </Button>
+                            <strong>Success! </strong> File deleted
+                            successfully.
+                          </Alert>
+                        )}
+                        <div className="row my-4">
+                          <div className="col-md-6">
+                            <input
+                              className="col-md-3 form-control"
+                              type="file"
+                              onChange={(e) => handleFileChange(e, patient._id)}
+                              id="formFile"
+                            />{" "}
+                          </div>
+                          <div className="col-md-4">
+                            <Button
+                              onClick={handleFileUpload}
+                              className="ms-3"
+                              size="md"
+                            >
+                              Upload
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  )}
+                      </>
+                    )}
+                  </div>
+                  <MedicalRecords></MedicalRecords>
                 </div>
-                <MedicalRecords></MedicalRecords>
               </div>
             </div>
           </div>
-        </div>
+        </>
       ) : (
         <Spinner />
       )}
