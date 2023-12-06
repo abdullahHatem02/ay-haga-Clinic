@@ -1,3 +1,4 @@
+
 'use client'
 import React from 'react';
 import { Button } from 'react-bootstrap';
@@ -7,7 +8,8 @@ import { doctorViewContract, doctorAcceptContract, rejectDoctor } from "../../re
 import { removeUser } from "../../redux/actions/userActions";
 import Image from 'react-bootstrap/Image';
 import { logout } from '@/app/redux/actions/authActions';
-
+import { doctorAcceptContractReducer } from '@/app/redux/reducers/doctorReducer';
+import { Alert } from 'react-bootstrap';
 const ContractPage = (props) => {
   const dispatch = useDispatch();
 const {doctor}=props;
@@ -35,6 +37,8 @@ const {doctor}=props;
     history.back()
   }
 
+
+
   // useEffect(() => {
   //   //dispatch(doctorViewContract(userId));
   // }, [dispatch, doctorContract, rejectionisLoading]);
@@ -44,8 +48,6 @@ const {doctor}=props;
     e.preventDefault();
    // console.log('accepted')
     dispatch(doctorAcceptContract(userId))
-    window.history.pushState({},"",`/doctor/${doctorId}`)
-	  window.location.reload()
   }
 
   const handleReject = (e) =>{
@@ -58,6 +60,11 @@ const {doctor}=props;
   const handleLogout= ()=>{
     dispatch(logout())
   }
+
+  const { loading, contract, error } = useSelector(
+    (state) => state.doctorAcceptContractReducer
+  );
+
 
   return (
       <div className='w-100'>
@@ -72,7 +79,7 @@ const {doctor}=props;
                 </label>
               </h1>
             </div>
-            <div className={`links&buttons collapse navbar-collapse col-md-6 show`}>
+            <div className={'links&buttons collapse navbar-collapse col-md-6 show'}>
               <ul className=" navbar-nav container d-flex justify-content-end ms-auto">
                 <li className="nav-item rounded ms-2">
                   <a className="btn btn-primary text-light mx-1" href="/guest/Login" onClick={()=> handleLogout()}>
@@ -148,10 +155,33 @@ const {doctor}=props;
                   This contract is valid as of November 2023.
                   </strong>
                 </p>
+                {contract && (
+                <>
+                  <Alert variant="success">
+                    You have successfully accepted your employment contract, Redirecting...
+                  </Alert>
+                  {setTimeout(() => {
+                   window.history.pushState({},"",`/doctor/${doctorId}`)
+                   window.location.reload()
+                  }, 3000)}
+                </>
+              )}
+              {error && <Alert variant="danger">{error}</Alert>}
               <hr />
               <div className='row mt-5'>
                 <Button onClick={(e)=>handleReject(e)} variant='md' className='col-md-3 px-3 btn btn-dark mx-auto' color='dark'>Reject</Button>
-                <Button onClick={(e)=>handleAccept(e)} variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
+                {loading ? (
+                  <Button className="col-md-3 px-3 btn btn-primary mx-auto" variant="primary" disabled>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Loading...
+                </Button> ) : (
+                  <Button onClick={(e)=>handleAccept(e)} variant='md' className='col-md-3 px-3 btn btn-primary mx-auto' color='primary'>Accept</Button>
+                )}
+                
               </div>
               </div>
             </div>) : (docStatus === 'waitingadmin' ? (

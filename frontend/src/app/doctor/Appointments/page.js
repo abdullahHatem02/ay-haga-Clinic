@@ -5,7 +5,7 @@ import {
 } from "@/app/redux/actions/doctorActions";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { Modal, ModalBody, ModalHeader } from "react-bootstrap";
+import { Modal, ModalBody, ModalHeader , Alert } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../../components/Button";
@@ -44,6 +44,10 @@ function docappointments() {
     (state) => state.doctorFollowUpReducer.loading
   );
 
+  const followupSuccess = useSelector(
+    (state) => state.doctorFollowUpReducer.appointment
+  );
+
   async function fetchData() {
     const queryObj = {
       date: selectedDate,
@@ -73,12 +77,22 @@ function docappointments() {
     setAppt(id);
   };
 
+  const [ShowfollowupAlert, setShowfollowupAlert] = useState(false);
+
   const handleFollowupSubmit = (id) => {
     dispatch(doctorFollowUpAction(id, newDate));
     setModal(false);
+    if(followupSuccess){
+    setShowfollowupAlert(true);
+    setTimeout(() => {
+      setShowfollowupAlert(false); // Hide the alert after 3000 milliseconds
+    }, 3000); }
   };
 
   function FollowupModal(show, onHide) {
+
+    
+    
     return (
       <Modal centered show={show.show} onHide={show.onHide} size="md" className="rounded">
         <ModalHeader closeButton className="bg-primary"></ModalHeader>
@@ -100,6 +114,7 @@ function docappointments() {
                 onChange={(e) => { handleFollowupDate(e) }}
               />
             </div>
+            
 
 
             <Button
@@ -108,11 +123,12 @@ function docappointments() {
               variant="sm"
               onClick={() => {
                 handleFollowupSubmit(appt);
-                console.log("hello");
               }}
               className="col-md-4 "
               disabled={newDate === null ? true : false}
             ></Button>
+
+
           </div>
         </ModalBody>
       </Modal>
@@ -153,6 +169,11 @@ function docappointments() {
     return [];
   }, [appointmentsData]);
 
+  const { loading, appointment, error } = useSelector(
+    (state) => state.followUpReducer
+  );
+   
+  
   return (
     <div className="global-text min-vh-100 d-flex flex-column">
       <NavbarDoc />
@@ -212,6 +233,12 @@ function docappointments() {
             setAppt(null);
           }}
         />
+              {ShowfollowupAlert && followupSuccess &&
+              ( 
+              <><Alert   id="myAlert" variant="success"  className="px-2">
+                  <strong>Success! </strong> Follow up scheduled successfully.
+                  </Alert> </>)}
+              {error && <Alert variant="danger">{error}</Alert>}
         {apps && apps.length > 0 &&
           <Table headers={headers} data={apps ? apps : []} className="col-md-10" />
         }
