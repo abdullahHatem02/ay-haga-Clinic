@@ -106,7 +106,7 @@ function ReserveModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton className="bg-primary"></Modal.Header>
+      <Modal.Header closeButton className="bg-light"></Modal.Header>
       <Modal.Body className="bg-light">
         <Modal.Title
           id="contained-modal-title-vcenter"
@@ -118,9 +118,19 @@ function ReserveModal(props) {
           <>
             <Form onSubmit={handleSubmit} className="text-semibold ">
               <div className="d-flex mt-5 justify-content-center">
-                <div className=" w-25 border border-5 border-danger me-5 rounded">
+                <div
+                  className=" w-25  me-5 rounded "
+                  style={{ border: "5px solid #dddddd" }}
+                >
                   {" "}
-                  <div className="display-1 text-center py-3 "> {date[2]}</div>
+                  <div
+                    className="bg-danger border-bottom  border-2"
+                    style={{ height: "30px" }}
+                  >
+                    {"  "}
+                    {}
+                  </div>
+                  <div className="display-1 text-center pb-2 "> {date[2]}</div>
                   <div className="display-7 text-center">{date[0]}</div>
                   <div className="display-7 text-center">
                     {date[1] + " " + date[3]}
@@ -178,9 +188,7 @@ function ReserveModal(props) {
                     </div>
                   </Form.Group>
                   <Form.Group className="row m-2">
-                    <Form.Label className="col-md-4">
-                      Payment Method *
-                    </Form.Label>
+                    <Form.Label className="col-md-4">Payment *</Form.Label>
                     <div className="col-md-8">
                       <Form.Check
                         inline
