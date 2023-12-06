@@ -27,6 +27,8 @@ const healthPackagesRouter = require("./routes/healthPackagesRoutes.js");
 const appointmentRouter = require("./routes/appointmentRoutes.js");
 const paymentController = require("./controllers/paymentController.js");
 const prescriptionRouter = require("./routes/prescriptionRoutes.js");
+const chatRouter = require ("./routes/chatRoutes.js");
+const messageRouter = require ("./routes/messageRoutes.js");
 
 app.enable("trust proxy");
 
@@ -42,6 +44,7 @@ const io = socketIO(server, {
     methods: ['GET', 'POST'],
   },
 });
+
 
 // Socket.io logic
 io.on('connection', (socket) => {
@@ -61,6 +64,58 @@ io.on('connection', (socket) => {
 
   socket.on('answerCall', (data) => {
     io.to(data.to).emit('callAccepted', data.signal);
+  });
+});
+
+//////////////////// SECOND SOCKET IMPLEMENTATION FOR CHAT
+
+
+const ioChat = socketIO(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ['GET', 'POST'],
+  },
+}).of('/chat');
+
+
+let users = [];
+
+const addUser = (userId, socketId) => {
+  !users.some((user) => user.userId === userId) &&
+    users.push({ userId, socketId });
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId) => {
+  return users.find((user) => user.userId === userId);
+};
+
+ioChat.on("connection", (socket) => {
+  console.log("a user connected.");
+
+  //take userId and socketId from user
+  socket.on("addUser", (userId) => {
+    addUser(userId, socket.id);
+    ioChat.emit("getUsers", users);
+  });
+
+  //send and get message
+  socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    const user = getUser(receiverId);
+    ioChat.to(user.socketId).emit("getMessage", {
+      senderId,
+      text,
+    });
+  });
+
+  //when disconnect
+  socket.on("disconnect", () => {
+    console.log("a user disconnected!");
+    removeUser(socket.id);
+    ioChat.emit("getUsers", users);
   });
 });
 
@@ -134,6 +189,8 @@ app.use("/api/v1/appointment", appointmentRouter);
 app.use("/api/v1/familyMembers", familyMembersRouter);
 app.use("/api/v1/healthPackages", healthPackagesRouter);
 app.use("/api/v1/prescriptions", prescriptionRouter);
+app.use("/api/v1/chats", chatRouter);
+app.use("/api/v1/messages", messageRouter);
 
 //404 Error , YOU MUST PUT YOUR ROUTERS ABOVE THAT COMMENT
 app.all("*", (req, res, next) => {
