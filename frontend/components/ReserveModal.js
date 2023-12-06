@@ -117,18 +117,17 @@ function ReserveModal(props) {
         {!success && (
           <>
             <Form onSubmit={handleSubmit} className="text-semibold ">
-              <div className="d-flex mt-5 justify-content-center">
+              <div className="d-flex mt-5 justify-content-center align-items-center ">
                 <div
                   className=" w-25  me-5 rounded "
                   style={{ border: "5px solid #dddddd" }}
                 >
                   {" "}
                   <div
-                    className="bg-danger border-bottom  border-2"
+                    className="bg-danger border-bottom  border-2 text-center text-light fs-5"
                     style={{ height: "30px" }}
                   >
-                    {"  "}
-                    {}
+                    Date
                   </div>
                   <div className="display-1 text-center pb-2 "> {date[2]}</div>
                   <div className="display-7 text-center">{date[0]}</div>
