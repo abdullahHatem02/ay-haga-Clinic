@@ -78,7 +78,7 @@ function appointments() {
         {!isLoading && apps && apps.length > 0 && (
           <>
             <div>
-              <div className="bg-white p-3 w-100 border-bottom d-flex justify-content-between">
+              <div className="bg-white p-3 w-100 border-bottom d-flex justify-content-between align-items-center">
                 <div className="">
                   <Image
                     src="/filter.svg"
@@ -90,7 +90,7 @@ function appointments() {
                 <div className="status-filter ">
                   <select
                     onChange={handleStatusChange}
-                    className="w-100 form-control text-muted p-2"
+                    className="w-100 form-control text-muted p-2 px-5"
                   >
                     <option value="">Filter by status</option>
                     <option value="Completed">Completed</option>
@@ -110,7 +110,7 @@ function appointments() {
                       backgroundColor: "white",
                       border: "1px solid #dee2e6",
                       borderRadius: "5px",
-                      padding: "5px",
+                      padding: "8px",
                     }}
                   />
                 </div>
